@@ -24,7 +24,7 @@ function Packages() {
 
         <h1>
 
-          Paquetes disponibles ✈️
+          Paquetes disponibles
 
         </h1>
 

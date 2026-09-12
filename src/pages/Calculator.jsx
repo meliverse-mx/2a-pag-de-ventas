@@ -48,7 +48,7 @@ function Calculator() {
 
         <h1>
 
-          Calculadora de ganancias 🧮
+          Calculadora de ganancias 
 
         </h1>
 

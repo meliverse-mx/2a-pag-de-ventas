@@ -31,7 +31,7 @@ function Content() {
 
         <h1>
 
-          Contenido para publicar 📲
+          Contenido para publicar 
 
         </h1>
 

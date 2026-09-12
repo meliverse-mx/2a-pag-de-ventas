@@ -31,7 +31,7 @@ function Scripts() {
 
         <h1>
 
-          Scripts de venta 💬
+          Scripts de venta 
 
         </h1>
 

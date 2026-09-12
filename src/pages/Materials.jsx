@@ -48,7 +48,7 @@ function Materials() {
 
         <h1>
 
-          Material de ventas 📚
+          Material de ventas 
 
         </h1>
 

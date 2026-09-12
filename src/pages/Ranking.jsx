@@ -34,7 +34,7 @@ function Ranking() {
 
         <h1>
 
-          Ranking 🏆
+          Ranking 
 
         </h1>
 

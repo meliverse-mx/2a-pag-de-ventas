@@ -59,14 +59,14 @@ function Dashboard() {
 
           <span className="eyebrow">
 
-            ✨ Kamtali Seller Hub
+             Kamtali Seller Hub
 
           </span>
 
           <h1>
 
             Convierte sueños
-            en viajes ✈️
+            en viajes 
 
           </h1>
 

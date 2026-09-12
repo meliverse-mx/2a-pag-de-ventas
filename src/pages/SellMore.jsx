@@ -97,7 +97,7 @@ function SellMore() {
 
         <h1>
 
-          Vender más 🎯
+          Vender más 
 
         </h1>
 

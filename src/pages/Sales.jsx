@@ -128,7 +128,7 @@ function Sales() {
 
         <h1>
 
-          Mis ventas 💰
+          Mis ventas 
 
         </h1>
 
