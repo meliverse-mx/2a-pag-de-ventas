@@ -8,7 +8,8 @@ import {
   Target,
   Calculator,
   ShoppingBag,
-  Trophy
+  Trophy,
+  GraduationCap,
 
 } from "lucide-react";
 
@@ -35,6 +36,13 @@ function Sidebar({
       label: "Paquetes",
       icon: <Plane size={20} />
     },
+
+     {
+      id: "academia",
+      name: "Academia Kamtali",
+      label: "Academia Kamtali",
+      icon: <GraduationCap size={20} />
+    }, 
 
     {
       id: "materials",
@@ -72,11 +80,11 @@ function Sidebar({
       icon: <ShoppingBag size={20} />
     },
 
-    {
+    /* {
       id: "ranking",
       label: "Ranking",
       icon: <Trophy size={20} />
-    }
+    } */
 
   ];
 
