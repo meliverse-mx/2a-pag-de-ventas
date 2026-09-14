@@ -726,6 +726,7 @@ export const packages = [
 
     image:
       "https://images.unsplash.com/photo-1545580492-8859ba8323f0?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGlzbmV5JTIwY2FsaWZvcm5pYXxlbnwwfHwwfHx8MA%3D%3D",
+     // "https://advisors.exoticca.com/_next/image?url=https%3A%2F%2Fstatic-es.exoticca.com%2Fimg%2Fp%2F14045%2F297258.jpg&w=3840&q=75",
 
     includes: [
 

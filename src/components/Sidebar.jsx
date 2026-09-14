@@ -99,17 +99,17 @@ function Sidebar({
 
       <div className="brand">
 
-        <div className="brand-icon">
+       {/*  <div className="brand-icon">
 
           ✈️
 
-        </div>
+        </div> */}
 
         <div>
 
-          <h2>Kamtaliers</h2>
+          <h2>K a m t a l i </h2>
 
-          <span>Equipo de venta</span>
+          <span>Travel Team</span>
 
         </div>
 
@@ -155,7 +155,7 @@ function Sidebar({
 
         <p>
 
-          ✨ Vende experiencias
+           Vende experiencias
 
         </p>
 

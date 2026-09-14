@@ -59,7 +59,7 @@ function Dashboard() {
 
           <span className="eyebrow">
 
-             Kamtali Seller Hub
+             Kamtaliers
 
           </span>
 

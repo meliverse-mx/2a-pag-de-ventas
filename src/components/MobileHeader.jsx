@@ -17,7 +17,7 @@ function MobileHeader({
 
       <div className="mobile-brand">
 
-        ✈️ Kamtali Seller Hub
+         Kamtaliers
 
       </div>
 
