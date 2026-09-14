@@ -107,9 +107,9 @@ function Sidebar({
 
         <div>
 
-          <h2>Kamtali</h2>
+          <h2>Kamtaliers</h2>
 
-          <span>Seller Hub</span>
+          <span>Equipo de venta</span>
 
         </div>
 
