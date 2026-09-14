@@ -120,7 +120,7 @@ export const packages = [
 
   },
   {
-    id: 3,
+    id: 4,
 
     destination:
       "Colombia",
@@ -141,9 +141,9 @@ export const packages = [
 
       "Vuelo",
 
-      "Hotel All Inclusive",
+      "Hotel",
 
-      "Entrada de un día a Xel-Ha + transporte ",
+      "Montserrate",
 
       /* "Traslados" */
 
@@ -156,7 +156,7 @@ export const packages = [
   },
 
   {
-    id: 3,
+    id: 5,
 
     destination:
       "Puerto Vallarta",
@@ -185,13 +185,13 @@ export const packages = [
 
     ],
 
-    pdf: "https://drive.google.com/file/d/1btRjNxLJ-nC1GhUYv3Lt7e6Sb__pNoSl/view?usp=sharing",
+    pdf: "https://drive.google.com/file/d/1JBFAd9KIM1hwEbkkrdbDTq3c3W6Bt5cL/view?usp=sharing",
 
     video: "#"
 
   },
   {
-    id: 3,
+    id: 6,
 
     destination:
       "Los Cabos",
@@ -220,13 +220,13 @@ export const packages = [
 
     ],
 
-    pdf: "https://drive.google.com/file/d/1btRjNxLJ-nC1GhUYv3Lt7e6Sb__pNoSl/view?usp=sharing",
+    pdf: "https://drive.google.com/file/d/1EueQgzjmidgoAByIwBRBZ_i91gaUSii3/view?usp=sharing",
 
     video: "#"
 
   },
   {
-    id: 3,
+    id: 7,
 
     destination:
       "Universal y Disney Orlando, Florida",
@@ -261,7 +261,7 @@ export const packages = [
 
   },
   {
-    id: 3,
+    id: 8,
 
     destination:
       "Universal y Disney California",
@@ -296,7 +296,7 @@ export const packages = [
 
   },
   {
-    id: 3,
+    id: 9,
 
     destination:
       "Perú",
@@ -332,7 +332,7 @@ export const packages = [
   },
 
   {
-    id: 3,
+    id: 10,
 
     destination:
       "Java y Bali",
@@ -367,7 +367,7 @@ export const packages = [
 
   },
   {
-    id: 3,
+    id: 11,
 
     destination:
       "Noruega e Islandia",
@@ -406,7 +406,7 @@ export const packages = [
   },
 
   {
-    id: 3,
+    id: 12,
 
     destination:
       "China",
@@ -445,7 +445,7 @@ export const packages = [
 
   },
   {
-    id: 3,
+    id: 13,
 
     destination:
       "París, Londres y Madrid",
@@ -485,7 +485,7 @@ export const packages = [
   },
 
   {
-    id: 3,
+    id: 14,
 
     destination:
       "Buenos Aires, Iguazú y La Patagonia",
@@ -526,7 +526,7 @@ export const packages = [
 
   },
   {
-    id: 3,
+    id: 15,
 
     destination:
       "Atenas & Escapada a las Islas Cícladas",
@@ -568,7 +568,7 @@ export const packages = [
   },
 
   {
-    id: 3,
+    id: 16,
 
     destination:
       "Argentina",
@@ -603,7 +603,7 @@ export const packages = [
 
   },
   {
-    id: 3,
+    id: 17,
 
     destination:
       "Italia",
@@ -639,7 +639,7 @@ export const packages = [
   },
 
   {
-    id: 3,
+    id: 18,
 
     destination:
       "Japón",
@@ -674,7 +674,7 @@ export const packages = [
 
   },
   {
-    id: 3,
+    id: 19,
 
     destination:
       "Namibia",
@@ -710,10 +710,10 @@ export const packages = [
   },
 
   {
-    id: 3,
+    id: 20,
 
     destination:
-      "Universal y Disney California",
+      "Dubai",
 
     duration:
       "4 días / 3 noches",
@@ -746,7 +746,7 @@ export const packages = [
 
   },
   {
-    id: 3,
+    id: 21,
 
     destination:
       "Colombia en 7 días",
