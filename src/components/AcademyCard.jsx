@@ -1,79 +1,384 @@
+import { useState } from "react";
+
 import {
   BookOpen,
   Clock,
-  CheckCircle
+  CheckCircle,
+  Lock,
+  PlayCircle,
+  X
 } from "lucide-react";
 
-function AcademyCard({ course }) {
+
+function getYoutubeEmbedUrl(url) {
+  try {
+    const parsedUrl = new URL(url);
+
+    // youtu.be/VIDEO_ID
+    if (
+      parsedUrl.hostname.includes(
+        "youtu.be"
+      )
+    ) {
+      const videoId =
+        parsedUrl.pathname.substring(1);
+
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+
+    // youtube.com/watch?v=VIDEO_ID
+    if (
+      parsedUrl.hostname.includes(
+        "youtube.com"
+      )
+    ) {
+      const videoId =
+        parsedUrl.searchParams.get("v");
+
+      if (videoId) {
+        return `https://www.youtube.com/embed/${videoId}`;
+      }
+    }
+
+    return url;
+
+  } catch {
+    return url;
+  }
+}
+
+
+function AcademyCard({
+  course,
+  locked,
+  completed,
+  completedLessons,
+  onCompleteLesson
+}) {
+
+  const [selectedLesson, setSelectedLesson] =
+    useState(null);
+
+
+  const completedCount =
+    completedLessons.length;
+
+
+  const totalLessons =
+    course.lessons.length;
+
+
+  const percentage =
+    Math.round(
+      (completedCount / totalLessons) * 100
+    );
+
+
+  const handleLessonClick = (lesson) => {
+
+    if (locked) return;
+
+    setSelectedLesson(lesson);
+  };
+
+
+  const handleCompleteLesson = () => {
+
+    if (!selectedLesson) return;
+
+    onCompleteLesson(
+      course.id,
+      selectedLesson.id
+    );
+
+    setSelectedLesson(null);
+  };
+
 
   return (
+    <>
 
-    <div className="academy-card">
+      <div
+        className={`academy-card
+          ${completed ? "completed" : ""}
+          ${locked ? "locked" : ""}
+        `}
+      >
 
-      <div className="academy-top">
+        {/* TOP */}
 
-        <div className="academy-icon">
+        <div className="academy-top">
 
-          <BookOpen size={28} />
+          <div className="academy-icon">
 
-        </div>
-
-        <span className="level">
-
-          {course.level}
-
-        </span>
-
-      </div>
-
-      <h3>
-        {course.title}
-      </h3>
-
-      <p>
-        {course.description}
-      </p>
-
-      <div className="duration">
-
-        <Clock size={17} />
-
-        {course.duration}
-
-      </div>
-
-      <div className="lessons">
-
-        <h4>
-          Aprenderás:
-        </h4>
-
-        {course.lessons.map((lesson, index) => (
-
-          <div
-            className="lesson"
-            key={index}
-          >
-
-            <CheckCircle size={16} />
-
-            {lesson}
+            {locked ? (
+              <Lock size={28} />
+            ) : completed ? (
+              <CheckCircle size={28} />
+            ) : (
+              <BookOpen size={28} />
+            )}
 
           </div>
 
-        ))}
+          <span className="level">
+            {course.level}
+          </span>
+
+        </div>
+
+
+        {/* TITLE */}
+
+        <h3>
+          {course.title}
+        </h3>
+
+
+        <p>
+          {course.description}
+        </p>
+
+
+        {/* DURATION */}
+
+        <div className="duration">
+
+          <Clock size={17} />
+
+          {course.duration}
+
+        </div>
+
+
+        {/* PROGRESO DEL CURSO */}
+
+        {!locked && (
+
+          <div className="course-progress">
+
+            <div className="course-progress-info">
+
+              <span>
+                Progreso
+              </span>
+
+              <strong>
+                {completedCount} /{" "}
+                {totalLessons}
+              </strong>
+
+            </div>
+
+
+            <div className="course-progress-bar">
+
+              <div
+                className="course-progress-fill"
+                style={{
+                  width: `${percentage}%`
+                }}
+              />
+
+            </div>
+
+
+            <span className="course-percentage">
+              {percentage}% completado
+            </span>
+
+          </div>
+
+        )}
+
+
+        {/* LECCIONES */}
+
+        <div className="lessons">
+
+          <h4>
+            Aprenderás:
+          </h4>
+
+
+          {course.lessons.map(
+            (lesson) => {
+
+              const lessonCompleted =
+                completedLessons.includes(
+                  lesson.id
+                );
+
+
+              return (
+                <button
+                  key={lesson.id}
+                  className={`lesson lesson-button ${
+                    lessonCompleted
+                      ? "lesson-completed"
+                      : ""
+                  }`}
+                  onClick={() =>
+                    handleLessonClick(
+                      lesson
+                    )
+                  }
+                  disabled={locked}
+                >
+
+                  <div className="lesson-left">
+
+                    {lessonCompleted ? (
+                      <CheckCircle
+                        size={17}
+                      />
+                    ) : (
+                      <PlayCircle
+                        size={17}
+                      />
+                    )}
+
+                    <span>
+                      {lesson.title}
+                    </span>
+
+                  </div>
+
+
+                  {lessonCompleted && (
+                    <small>
+                      ✓ Listo
+                    </small>
+                  )}
+
+                </button>
+              );
+
+            }
+          )}
+
+        </div>
+
+
+        {/* ESTADO */}
+
+        {completed ? (
+
+          <button
+            className="completed-button"
+            disabled
+          >
+            <CheckCircle size={18} />
+            Curso completado
+          </button>
+
+        ) : locked ? (
+
+          <button
+            className="primary-button"
+            disabled
+          >
+            <Lock size={18} />
+            Curso bloqueado
+          </button>
+
+        ) : (
+
+          <div className="course-status">
+
+            <PlayCircle size={18} />
+
+            <span>
+              Completa las lecciones
+              para obtener tu sello
+            </span>
+
+          </div>
+
+        )}
 
       </div>
 
-      <button className="primary-button">
 
-        Comenzar curso
+      {/* MODAL VIDEO */}
 
-      </button>
+      {selectedLesson && (
 
-    </div>
+        <div
+          className="video-modal-overlay"
+          onClick={() =>
+            setSelectedLesson(null)
+          }
+        >
 
+          <div
+            className="video-modal"
+            onClick={(e) =>
+              e.stopPropagation()
+            }
+          >
+
+            <button
+              className="video-modal-close"
+              onClick={() =>
+                setSelectedLesson(null)
+              }
+            >
+              <X size={22} />
+            </button>
+
+
+            <div className="video-modal-header">
+
+              <span>
+                ACADEMIA KAMTALI
+              </span>
+
+              <h3>
+                {selectedLesson.title}
+              </h3>
+
+            </div>
+
+
+            <div className="video-container">
+
+              <iframe
+                src={getYoutubeEmbedUrl(
+                  selectedLesson.videoUrl
+                )}
+                title={
+                  selectedLesson.title
+                }
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+
+            </div>
+
+
+            <button
+              className="complete-lesson-button"
+              onClick={
+                handleCompleteLesson
+              }
+            >
+
+              <CheckCircle size={19} />
+
+              Marcar lección como completada
+
+            </button>
+
+          </div>
+
+        </div>
+
+      )}
+
+    </>
   );
 }
+
 
 export default AcademyCard;

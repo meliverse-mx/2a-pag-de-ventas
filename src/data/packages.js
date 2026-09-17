@@ -302,13 +302,13 @@ export const packages = [
       "Perú",
 
     duration:
-      "4 días / 3 noches",
+      "11 días / 10 noches",
 
-  /*   price:
-      19945,
+     price:
+      31389,
 
     commission:
-      2000, */
+      2000, 
 
     image:
       "https://images.unsplash.com/photo-1461681922067-669418071e5c?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHBlcnV8ZW58MHx8MHx8fDA%3D",
@@ -317,15 +317,15 @@ export const packages = [
 
       "Vuelo",
 
-      "Hotel All Inclusive",
+      "Hotespedaje",
 
-      "Entrada de un día a Xel-Ha + transporte ",
+      "Caminos del Inca y Montaña de 7 Colores",
 
       /* "Traslados" */
 
     ],
 
-    pdf: "https://drive.google.com/file/d/1btRjNxLJ-nC1GhUYv3Lt7e6Sb__pNoSl/view?usp=sharing",
+    pdf: "https://drive.google.com/file/d/1QK1M45H2e6Lvt_4vG5bKKaA8IBPQTZJa/view?usp=sharing",
 
     video: "#"
 
