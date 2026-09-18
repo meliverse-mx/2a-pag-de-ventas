@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import academyCourses from "../data/academy";
 import AcademyCard from "../components/AcademyCard";
+import CertificateModal from "../components/CertificateModal";
 
 import {
   GraduationCap,
@@ -14,76 +15,132 @@ import {
   Award
 } from "lucide-react";
 
-const STORAGE_KEY = "kamtaliAcademyProgress";
+const STORAGE_KEY =
+  "kamtaliAcademyProgress";
+
+const CERTIFICATE_KEY =
+  "kamtaliCertificateShown";
 
 function Academy() {
-  const [progress, setProgress] = useState({});
 
-  // Cargar progreso guardado
+  const [progress, setProgress] =
+    useState({});
+
+  const [showCertificate, setShowCertificate] =
+    useState(false);
+
+  /*
+  =========================================
+  CARGAR PROGRESO
+  =========================================
+  */
+
   useEffect(() => {
-    const savedProgress = localStorage.getItem(STORAGE_KEY);
+
+    const savedProgress =
+      localStorage.getItem(STORAGE_KEY);
 
     if (savedProgress) {
+
       try {
-        setProgress(JSON.parse(savedProgress));
+
+        setProgress(
+          JSON.parse(savedProgress)
+        );
+
       } catch {
+
         setProgress({});
+
       }
     }
+
   }, []);
 
-  // Guardar progreso
+  /*
+  =========================================
+  GUARDAR PROGRESO
+  =========================================
+  */
+
   useEffect(() => {
+
     localStorage.setItem(
       STORAGE_KEY,
       JSON.stringify(progress)
     );
+
   }, [progress]);
 
-  // Marcar una lección como completada
-  const handleCompleteLesson = (courseId, lessonId) => {
-    setProgress((currentProgress) => {
-      const courseProgress =
-        currentProgress[courseId] || [];
+  /*
+  =========================================
+  COMPLETAR LECCIÓN
+  =========================================
+  */
 
-      if (courseProgress.includes(lessonId)) {
-        return currentProgress;
+  const handleCompleteLesson = (
+    courseId,
+    lessonId
+  ) => {
+
+    setProgress(
+      (currentProgress) => {
+
+        const courseProgress =
+          currentProgress[courseId] || [];
+
+        if (
+          courseProgress.includes(
+            lessonId
+          )
+        ) {
+
+          return currentProgress;
+        }
+
+        return {
+
+          ...currentProgress,
+
+          [courseId]: [
+            ...courseProgress,
+            lessonId
+          ]
+
+        };
       }
-
-      return {
-        ...currentProgress,
-
-        [courseId]: [
-          ...courseProgress,
-          lessonId
-        ]
-      };
-    });
-  };
-
-  // Saber cuántas lecciones tiene completas un curso
-  const getCourseProgress = (course) => {
-    const completedLessons =
-      progress[course.id] || [];
-
-    return completedLessons.length;
-  };
-
-  // Saber si un curso está completamente terminado
-  const isCourseCompleted = (course) => {
-    const completedLessons =
-      progress[course.id] || [];
-
-    return (
-      completedLessons.length ===
-      course.lessons.length
     );
   };
 
-  // Cursos completados
-  const completedCourses = academyCourses.filter(
-    (course) => isCourseCompleted(course)
-  );
+  /*
+  =========================================
+  CURSO COMPLETADO
+  =========================================
+  */
+
+  const isCourseCompleted =
+    (course) => {
+
+      const completedLessons =
+        progress[course.id] || [];
+
+      return (
+        completedLessons.length ===
+        course.lessons.length
+      );
+    };
+
+  /*
+  =========================================
+  CURSOS COMPLETADOS
+  =========================================
+  */
+
+  const completedCourses =
+    academyCourses.filter(
+      (course) =>
+        isCourseCompleted(course)
+    );
 
   const completedCount =
     completedCourses.length;
@@ -91,23 +148,82 @@ function Academy() {
   const totalCourses =
     academyCourses.length;
 
+  /*
+  =========================================
+  PROGRESO GENERAL
+  =========================================
+  */
+
   const overallProgress =
     Math.round(
-      (completedCount / totalCourses) * 100
+      (completedCount /
+        totalCourses) *
+        100
     );
 
-  // Saber si el curso está desbloqueado
-  const isCourseLocked = (index) => {
-    if (index === 0) return false;
+  /*
+  =========================================
+  ACADEMIA TERMINADA
+  =========================================
+  */
 
-    const previousCourse =
-      academyCourses[index - 1];
+  const academyCompleted =
+    completedCount ===
+    totalCourses;
 
-    return !isCourseCompleted(previousCourse);
-  };
+  /*
+  =========================================
+  MOSTRAR CERTIFICADO
+  =========================================
+  */
 
-  // Nivel actual
+  useEffect(() => {
+
+    const certificateShown =
+      localStorage.getItem(
+        CERTIFICATE_KEY
+      );
+
+    if (
+      academyCompleted &&
+      !certificateShown
+    ) {
+
+      setShowCertificate(true);
+
+    }
+
+  }, [academyCompleted]);
+
+  /*
+  =========================================
+  CURSO BLOQUEADO
+  =========================================
+  */
+
+  const isCourseLocked =
+    (index) => {
+
+      if (index === 0) {
+        return false;
+      }
+
+      const previousCourse =
+        academyCourses[index - 1];
+
+      return !isCourseCompleted(
+        previousCourse
+      );
+    };
+
+  /*
+  =========================================
+  NIVEL
+  =========================================
+  */
+
   const getLevel = () => {
+
     if (completedCount === 0) {
       return "Aspirante Kamtali";
     }
@@ -127,33 +243,46 @@ function Academy() {
     return "Vendedor Kamtali PRO";
   };
 
-  // Siguiente curso
+  /*
+  =========================================
+  SIGUIENTE CURSO
+  =========================================
+  */
+
   const nextCourse =
     academyCourses.find(
-      (course) => !isCourseCompleted(course)
+      (course) =>
+        !isCourseCompleted(course)
     );
 
   return (
+
     <div className="academy-page">
 
       {/* HERO */}
+
       <div className="academy-hero">
 
         <div>
+
           <span className="academy-label">
             🎓 ACADEMIA KAMTALI
           </span>
 
           <h1>
             Aprende a vender viajes
-            y convierte sueños en experiencias
+            y convierte sueños en
+            experiencias
           </h1>
 
           <p>
-            Aquí encontrarás capacitaciones,
-            herramientas y estrategias para
+            Aquí encontrarás
+            capacitaciones,
+            herramientas y
+            estrategias para
             ayudarte a vender más.
           </p>
+
         </div>
 
         <GraduationCap size={90} />
@@ -162,6 +291,7 @@ function Academy() {
 
 
       {/* PASAPORTE */}
+
       <div className="kamtali-passport">
 
         <div className="passport-header">
@@ -171,6 +301,7 @@ function Academy() {
           </div>
 
           <div className="passport-title">
+
             <span>
               PASAPORTE KAMTALI
             </span>
@@ -178,6 +309,7 @@ function Academy() {
             <h2>
               {getLevel()}
             </h2>
+
           </div>
 
         </div>
@@ -192,7 +324,8 @@ function Academy() {
             </span>
 
             <strong>
-              {completedCount} / {totalCourses} cursos
+              {completedCount} /{" "}
+              {totalCourses} cursos
             </strong>
 
           </div>
@@ -203,7 +336,8 @@ function Academy() {
             <div
               className="progress-fill"
               style={{
-                width: `${overallProgress}%`
+                width:
+                  `${overallProgress}%`
               }}
             />
 
@@ -211,7 +345,10 @@ function Academy() {
 
 
           <div className="progress-percentage">
-            {overallProgress}% completado
+
+            {overallProgress}%
+            {" "}completado
+
           </div>
 
         </div>
@@ -221,38 +358,53 @@ function Academy() {
 
         <div className="passport-stamps">
 
-          {academyCourses.map((course) => {
+          {academyCourses.map(
+            (course) => {
 
-            const completed =
-              isCourseCompleted(course);
+              const completed =
+                isCourseCompleted(
+                  course
+                );
 
-            return (
-              <div
-                key={course.id}
-                className={`passport-stamp ${
-                  completed
-                    ? "active"
-                    : ""
-                }`}
-              >
+              return (
 
-                <div className="stamp-icon">
+                <div
+                  key={course.id}
+                  className={
+                    `passport-stamp ${
+                      completed
+                        ? "active"
+                        : ""
+                    }`
+                  }
+                >
 
-                  {completed ? (
-                    <CheckCircle size={28} />
-                  ) : (
-                    <Lock size={22} />
-                  )}
+                  <div className="stamp-icon">
+
+                    {completed ? (
+
+                      <CheckCircle
+                        size={28}
+                      />
+
+                    ) : (
+
+                      <Lock
+                        size={22}
+                      />
+
+                    )}
+
+                  </div>
+
+                  <span>
+                    Nivel {course.id}
+                  </span>
 
                 </div>
-
-                <span>
-                  Nivel {course.id}
-                </span>
-
-              </div>
-            );
-          })}
+              );
+            }
+          )}
 
         </div>
 
@@ -262,26 +414,37 @@ function Academy() {
         <div className="passport-message">
 
           {nextCourse ? (
+
             <>
+
               <Star size={20} />
 
               <span>
+
                 Tu siguiente destino:
+
                 <strong>
                   {" "}
                   {nextCourse.title}
                 </strong>
+
               </span>
+
             </>
+
           ) : (
+
             <>
+
               <Award size={22} />
 
               <span>
                 🎉 ¡Has completado toda
                 la Academia Kamtali!
               </span>
+
             </>
+
           )}
 
         </div>
@@ -294,6 +457,7 @@ function Academy() {
       <div className="academy-stats">
 
         <div>
+
           <BookOpen />
 
           <strong>
@@ -303,10 +467,12 @@ function Academy() {
           <span>
             Cursos
           </span>
+
         </div>
 
 
         <div>
+
           <Trophy />
 
           <strong>
@@ -316,10 +482,12 @@ function Academy() {
           <span>
             Completados
           </span>
+
         </div>
 
 
         <div>
+
           <TrendingUp />
 
           <strong>
@@ -329,6 +497,7 @@ function Academy() {
           <span>
             Progreso
           </span>
+
         </div>
 
       </div>
@@ -341,10 +510,12 @@ function Academy() {
       </h2>
 
       <p className="academy-route-description">
+
         Completa cada lección para avanzar.
         Cuando termines todas las lecciones
         de un curso, obtendrás su sello y
         desbloquearás el siguiente nivel.
+
       </p>
 
 
@@ -365,6 +536,7 @@ function Academy() {
               progress[course.id] || [];
 
             return (
+
               <AcademyCard
                 key={course.id}
                 course={course}
@@ -377,11 +549,25 @@ function Academy() {
                   handleCompleteLesson
                 }
               />
+
             );
           }
         )}
 
       </div>
+
+
+      {/* MODAL CERTIFICADO */}
+
+      {showCertificate && (
+
+        <CertificateModal
+          onClose={() =>
+            setShowCertificate(false)
+          }
+        />
+
+      )}
 
     </div>
   );

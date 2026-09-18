@@ -9,44 +9,32 @@ import {
   X
 } from "lucide-react";
 
-
 function getYoutubeEmbedUrl(url) {
   try {
     const parsedUrl = new URL(url);
 
-    // youtu.be/VIDEO_ID
-    if (
-      parsedUrl.hostname.includes(
-        "youtu.be"
-      )
-    ) {
-      const videoId =
-        parsedUrl.pathname.substring(1);
+    // YouTube corto: youtu.be/VIDEO_ID
+    if (parsedUrl.hostname.includes("youtu.be")) {
+      const videoId = parsedUrl.pathname.substring(1);
 
       return `https://www.youtube.com/embed/${videoId}`;
     }
 
-    // youtube.com/watch?v=VIDEO_ID
-    if (
-      parsedUrl.hostname.includes(
-        "youtube.com"
-      )
-    ) {
-      const videoId =
-        parsedUrl.searchParams.get("v");
+    // YouTube normal: youtube.com/watch?v=VIDEO_ID
+    if (parsedUrl.hostname.includes("youtube.com")) {
+      const videoId = parsedUrl.searchParams.get("v");
 
       if (videoId) {
         return `https://www.youtube.com/embed/${videoId}`;
       }
     }
 
+    // Si ya viene como embed
     return url;
-
   } catch {
     return url;
   }
 }
-
 
 function AcademyCard({
   course,
@@ -55,35 +43,29 @@ function AcademyCard({
   completedLessons,
   onCompleteLesson
 }) {
-
   const [selectedLesson, setSelectedLesson] =
     useState(null);
-
 
   const completedCount =
     completedLessons.length;
 
-
   const totalLessons =
     course.lessons.length;
 
-
   const percentage =
-    Math.round(
-      (completedCount / totalLessons) * 100
-    );
-
+    totalLessons > 0
+      ? Math.round(
+          (completedCount / totalLessons) * 100
+        )
+      : 0;
 
   const handleLessonClick = (lesson) => {
-
     if (locked) return;
 
     setSelectedLesson(lesson);
   };
 
-
   const handleCompleteLesson = () => {
-
     if (!selectedLesson) return;
 
     onCompleteLesson(
@@ -94,10 +76,8 @@ function AcademyCard({
     setSelectedLesson(null);
   };
 
-
   return (
     <>
-
       <div
         className={`academy-card
           ${completed ? "completed" : ""}
@@ -106,11 +86,9 @@ function AcademyCard({
       >
 
         {/* TOP */}
-
         <div className="academy-top">
 
           <div className="academy-icon">
-
             {locked ? (
               <Lock size={28} />
             ) : completed ? (
@@ -118,7 +96,6 @@ function AcademyCard({
             ) : (
               <BookOpen size={28} />
             )}
-
           </div>
 
           <span className="level">
@@ -127,34 +104,23 @@ function AcademyCard({
 
         </div>
 
-
         {/* TITLE */}
-
         <h3>
           {course.title}
         </h3>
-
 
         <p>
           {course.description}
         </p>
 
-
         {/* DURATION */}
-
         <div className="duration">
-
           <Clock size={17} />
-
           {course.duration}
-
         </div>
 
-
         {/* PROGRESO DEL CURSO */}
-
         {!locked && (
-
           <div className="course-progress">
 
             <div className="course-progress-info">
@@ -164,12 +130,10 @@ function AcademyCard({
               </span>
 
               <strong>
-                {completedCount} /{" "}
-                {totalLessons}
+                {completedCount} / {totalLessons}
               </strong>
 
             </div>
-
 
             <div className="course-progress-bar">
 
@@ -182,86 +146,68 @@ function AcademyCard({
 
             </div>
 
-
             <span className="course-percentage">
               {percentage}% completado
             </span>
 
           </div>
-
         )}
 
-
         {/* LECCIONES */}
-
         <div className="lessons">
 
           <h4>
             Aprenderás:
           </h4>
 
+          {course.lessons.map((lesson) => {
 
-          {course.lessons.map(
-            (lesson) => {
-
-              const lessonCompleted =
-                completedLessons.includes(
-                  lesson.id
-                );
-
-
-              return (
-                <button
-                  key={lesson.id}
-                  className={`lesson lesson-button ${
-                    lessonCompleted
-                      ? "lesson-completed"
-                      : ""
-                  }`}
-                  onClick={() =>
-                    handleLessonClick(
-                      lesson
-                    )
-                  }
-                  disabled={locked}
-                >
-
-                  <div className="lesson-left">
-
-                    {lessonCompleted ? (
-                      <CheckCircle
-                        size={17}
-                      />
-                    ) : (
-                      <PlayCircle
-                        size={17}
-                      />
-                    )}
-
-                    <span>
-                      {lesson.title}
-                    </span>
-
-                  </div>
-
-
-                  {lessonCompleted && (
-                    <small>
-                      ✓ Listo
-                    </small>
-                  )}
-
-                </button>
+            const lessonCompleted =
+              completedLessons.includes(
+                lesson.id
               );
 
-            }
-          )}
+            return (
+              <button
+                key={lesson.id}
+                className={`lesson lesson-button ${
+                  lessonCompleted
+                    ? "lesson-completed"
+                    : ""
+                }`}
+                onClick={() =>
+                  handleLessonClick(lesson)
+                }
+                disabled={locked}
+              >
+
+                <div className="lesson-left">
+
+                  {lessonCompleted ? (
+                    <CheckCircle size={17} />
+                  ) : (
+                    <PlayCircle size={17} />
+                  )}
+
+                  <span>
+                    {lesson.title}
+                  </span>
+
+                </div>
+
+                {lessonCompleted && (
+                  <small>
+                    ✓ Listo
+                  </small>
+                )}
+
+              </button>
+            );
+          })}
 
         </div>
 
-
         {/* ESTADO */}
-
         {completed ? (
 
           <button
@@ -294,14 +240,11 @@ function AcademyCard({
             </span>
 
           </div>
-
         )}
 
       </div>
 
-
       {/* MODAL VIDEO */}
-
       {selectedLesson && (
 
         <div
@@ -323,10 +266,10 @@ function AcademyCard({
               onClick={() =>
                 setSelectedLesson(null)
               }
+              aria-label="Cerrar video"
             >
               <X size={22} />
             </button>
-
 
             <div className="video-modal-header">
 
@@ -340,22 +283,18 @@ function AcademyCard({
 
             </div>
 
-
             <div className="video-container">
 
               <iframe
                 src={getYoutubeEmbedUrl(
                   selectedLesson.videoUrl
                 )}
-                title={
-                  selectedLesson.title
-                }
+                title={selectedLesson.title}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
               />
 
             </div>
-
 
             <button
               className="complete-lesson-button"
@@ -363,22 +302,17 @@ function AcademyCard({
                 handleCompleteLesson
               }
             >
-
               <CheckCircle size={19} />
-
               Marcar lección como completada
-
             </button>
 
           </div>
 
         </div>
-
       )}
 
     </>
   );
 }
-
 
 export default AcademyCard;
