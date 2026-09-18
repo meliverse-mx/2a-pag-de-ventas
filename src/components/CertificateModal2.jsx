@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Award,
   Download,
@@ -7,32 +7,6 @@ import {
   User
 } from "lucide-react";
 import { jsPDF } from "jspdf";
-
-/*
- * Fondo del certificado (diseño sin nombre ni fecha).
- * Ajusta la ruta según dónde guardes el archivo en tu proyecto.
- */
-import certificateBg from "../assets/certificado-fondo.jpg";
-
-/*
- * MEDIDAS DEL PDF (A4 horizontal, en mm)
- * Si quieres mover algo, cambia solo estos valores.
- */
-const PAGE_WIDTH = 297;
-const PAGE_HEIGHT = 210;
-const CENTER_X = 149;      // centro visual del diseño
-const NAME_Y = 106.5;      // línea base del nombre
-const NAME_LINE_Y = 111.5; // línea decorativa bajo el nombre
-const NAME_MAX_WIDTH = 180; // ancho máximo del nombre
-const DATE_Y = 171;        // línea base de la fecha
-
-const loadImage = (src) =>
-  new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => resolve(img);
-    img.onerror = reject;
-    img.src = src;
-  });
 
 function CertificateModal({ onClose }) {
   const [step, setStep] = useState("name");
@@ -43,11 +17,6 @@ function CertificateModal({ onClose }) {
 
   const [downloading, setDownloading] =
     useState(false);
-
-  // Precarga el fondo para que la descarga sea inmediata
-  useEffect(() => {
-    loadImage(certificateBg).catch(() => {});
-  }, []);
 
   const handleGenerateCertificate = () => {
     const cleanName = sellerName.trim();
@@ -65,7 +34,7 @@ function CertificateModal({ onClose }) {
     setStep("certificate");
   };
 
-  const downloadCertificate = async () => {
+  const downloadCertificate = () => {
     setDownloading(true);
 
     try {
@@ -75,60 +44,70 @@ function CertificateModal({ onClose }) {
         format: "a4"
       });
 
+      const pageWidth = 297;
+      const pageHeight = 210;
+
       /*
-       * FONDO (marco, logo, textos fijos e insignia)
+       * FONDO
        */
 
-      const background = await loadImage(
-        certificateBg
-      );
+      doc.setFillColor(250, 248, 243);
 
-      doc.addImage(
-        background,
-        "JPEG",
+      doc.rect(
         0,
         0,
-        PAGE_WIDTH,
-        PAGE_HEIGHT,
-        undefined,
-        "FAST"
+        pageWidth,
+        pageHeight,
+        "F"
       );
 
 
       /*
-       * NOMBRE
-       * Se reduce el tamaño automáticamente
-       * si el nombre es muy largo.
+       * MARCO EXTERIOR
        */
 
-      doc.setFont(
-        "times",
-        "bolditalic"
+      doc.setDrawColor(180, 150, 80);
+
+      doc.setLineWidth(1.5);
+
+      doc.rect(
+        10,
+        10,
+        pageWidth - 20,
+        pageHeight - 20
       );
 
-      let nameSize = 36;
 
-      doc.setFontSize(nameSize);
+      /*
+       * MARCO INTERIOR
+       */
 
-      while (
-        doc.getTextWidth(sellerName) >
-          NAME_MAX_WIDTH &&
-        nameSize > 16
-      ) {
-        nameSize -= 1;
-        doc.setFontSize(nameSize);
-      }
+      doc.setLineWidth(0.5);
+
+      doc.rect(
+        15,
+        15,
+        pageWidth - 30,
+        pageHeight - 30
+      );
+
+
+      /*
+       * SÍMBOLO
+       */
+
+      doc.setFontSize(28);
 
       doc.setTextColor(
-        35,
-        30,
-        22
+        180,
+        150,
+        80
       );
 
       doc.text(
-        sellerName,
-        CENTER_X,
-        NAME_Y,
+        "✦",
+        pageWidth / 2,
+        38,
         {
           align: "center"
         }
@@ -136,13 +115,111 @@ function CertificateModal({ onClose }) {
 
 
       /*
-       * LÍNEA DORADA BAJO EL NOMBRE
+       * TÍTULO
        */
 
-      const halfLine = Math.max(
-        doc.getTextWidth(sellerName) / 2 + 10,
-        60
+      doc.setFont(
+        "helvetica",
+        "bold"
       );
+
+      doc.setFontSize(28);
+
+      doc.setTextColor(
+        35,
+        35,
+        35
+      );
+
+      doc.text(
+        "CERTIFICADO DE FINALIZACIÓN",
+        pageWidth / 2,
+        58,
+        {
+          align: "center"
+        }
+      );
+
+
+      /*
+       * ACADEMIA
+       */
+
+      doc.setFont(
+        "helvetica",
+        "normal"
+      );
+
+      doc.setFontSize(15);
+
+      doc.setTextColor(
+        110,
+        90,
+        50
+      );
+
+      doc.text(
+        "ACADEMIA KAMTALI",
+        pageWidth / 2,
+        70,
+        {
+          align: "center"
+        }
+      );
+
+
+      /*
+       * TEXTO
+       */
+
+      doc.setFontSize(12);
+
+      doc.setTextColor(
+        70,
+        70,
+        70
+      );
+
+      doc.text(
+        "Se otorga el presente certificado a",
+        pageWidth / 2,
+        88,
+        {
+          align: "center"
+        }
+      );
+
+
+      /*
+       * NOMBRE
+       */
+
+      doc.setFont(
+        "helvetica",
+        "bold"
+      );
+
+      doc.setFontSize(25);
+
+      doc.setTextColor(
+        30,
+        30,
+        30
+      );
+
+      doc.text(
+        sellerName,
+        pageWidth / 2,
+        105,
+        {
+          align: "center"
+        }
+      );
+
+
+      /*
+       * LÍNEA
+       */
 
       doc.setDrawColor(
         180,
@@ -153,10 +230,73 @@ function CertificateModal({ onClose }) {
       doc.setLineWidth(0.4);
 
       doc.line(
-        CENTER_X - halfLine,
-        NAME_LINE_Y,
-        CENTER_X + halfLine,
-        NAME_LINE_Y
+        85,
+        110,
+        212,
+        110
+      );
+
+
+      /*
+       * DESCRIPCIÓN
+       */
+
+      doc.setFont(
+        "helvetica",
+        "normal"
+      );
+
+      doc.setFontSize(11);
+
+      doc.setTextColor(
+        70,
+        70,
+        70
+      );
+
+      doc.text(
+        "por haber completado satisfactoriamente todos los niveles de capacitación",
+        pageWidth / 2,
+        125,
+        {
+          align: "center"
+        }
+      );
+
+      doc.text(
+        "de la Academia Kamtali y formar parte de nuestra comunidad de vendedores.",
+        pageWidth / 2,
+        133,
+        {
+          align: "center"
+        }
+      );
+
+
+      /*
+       * NIVEL
+       */
+
+      doc.setFont(
+        "helvetica",
+        "bold"
+      );
+
+      doc.setFontSize(15);
+
+      doc.setTextColor(
+        110,
+        90,
+        50
+      );
+
+      doc.text(
+        "VENDEDOR KAMTALI PRO",
+        pageWidth / 2,
+        151,
+        {
+          align: "center"
+        }
       );
 
 
@@ -164,8 +304,10 @@ function CertificateModal({ onClose }) {
        * FECHA
        */
 
+      const date = new Date();
+
       const formattedDate =
-        new Date().toLocaleDateString(
+        date.toLocaleDateString(
           "es-MX",
           {
             day: "numeric",
@@ -179,18 +321,68 @@ function CertificateModal({ onClose }) {
         "normal"
       );
 
-      doc.setFontSize(10.3);
+      doc.setFontSize(10);
 
       doc.setTextColor(
-        60,
-        60,
-        60
+        90,
+        90,
+        90
       );
 
       doc.text(
         `Fecha de finalización: ${formattedDate}`,
-        CENTER_X,
-        DATE_Y,
+        pageWidth / 2,
+        169,
+        {
+          align: "center"
+        }
+      );
+
+
+      /*
+       * KAMTALI
+       */
+
+      doc.setFont(
+        "helvetica",
+        "bold"
+      );
+
+      doc.setFontSize(13);
+
+      doc.setTextColor(
+        35,
+        35,
+        35
+      );
+
+      doc.text(
+        "Kamtali Travel",
+        pageWidth / 2,
+        184,
+        {
+          align: "center"
+        }
+      );
+
+
+      doc.setFont(
+        "helvetica",
+        "italic"
+      );
+
+      doc.setFontSize(9);
+
+      doc.setTextColor(
+        110,
+        110,
+        110
+      );
+
+      doc.text(
+        "Donde tus sueños toman vuelo",
+        pageWidth / 2,
+        191,
         {
           align: "center"
         }
