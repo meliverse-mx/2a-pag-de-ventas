@@ -340,28 +340,28 @@ export const packages = [
     duration:
       "4 días / 3 noches",
 
- /*    price:
-      19945,
+    price:
+      75999,
 
     commission:
-      2000, */
+      2000,
 
     image:
-      "https://advisors.exoticca.com/_next/image?url=https%3A%2F%2Fstatic-es.exoticca.com%2Fimg%2Fp%2F22738%2F427232.jpg&w=1920&q=75",
+      "https://advisors.exoticca.com/_next/image?url=https%3A%2F%2Fstatic-es.exoticca.com%2Fimg%2Fp%2F22738%2F427232.jpg&w=3840&q=75",
 
     includes: [
 
       "Vuelo",
 
-      "Hotel All Inclusive",
+      "Alojamimento",
 
-      "Entrada de un día a Xel-Ha + transporte ",
+      "Traslados ",
 
       /* "Traslados" */
 
     ],
 
-    pdf: "https://drive.google.com/file/d/1btRjNxLJ-nC1GhUYv3Lt7e6Sb__pNoSl/view?usp=sharing",
+    pdf: "https://drive.google.com/file/d/1Ux6IC4NwjlWSdQgdybaFzydIGxtgY9lY/view?usp=sharing",
 
     video: "#"
 

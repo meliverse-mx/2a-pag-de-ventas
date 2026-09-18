@@ -11,7 +11,7 @@ const academyCourses = [
       {
         id: "1-1",
         title: "¿Qué es Kamtali Travel?",
-        videoUrl: "https://www.youtube.com/watch?v=TU_VIDEO_1"
+        videoUrl: "https://www.youtube.com/watch?v=fY7wXGdP78c&list=RDfY7wXGdP78c&start_radio=1"
       },
       {
         id: "1-2",
@@ -43,7 +43,7 @@ const academyCourses = [
       {
         id: "2-1",
         title: "Cómo usar tus redes sociales",
-        videoUrl: "https://www.youtube.com/watch?v=VIDEO"
+        videoUrl: "https://www.youtube.com/watch?v=fY7wXGdP78c&list=RDfY7wXGdP78c&start_radio=1"
       },
       {
         id: "2-2",
