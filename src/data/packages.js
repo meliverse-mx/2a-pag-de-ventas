@@ -23,8 +23,8 @@ export const packages = [
     id: 2,
     destination: "Europa Multidestino",
     duration: "13 días",
-    price: 45000,
-    commission: 3500,
+  /*   price: 45000,
+    commission: 3500, */
     image: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=900&q=80",
     categories: ["internacional", "grupal"],
     includes: [
@@ -106,8 +106,8 @@ export const packages = [
     id: 7,
     destination: "Universal y Disney Orlando",
     duration: "4 días / 3 noches",
-    price: 28900,
-    commission: 2500,
+    /* price: 28900,
+    commission: 2500, */
     image: "https://images.unsplash.com/photo-1618945372420-2470ece5277c?w=900&auto=format&fit=crop&q=60",
     categories: ["internacional", "tematico"],
     includes: [
@@ -122,8 +122,8 @@ export const packages = [
     id: 8,
     destination: "Universal y Disney California",
     duration: "4 días / 3 noches",
-    price: 27500,
-    commission: 2300,
+    /* price: 27500,
+    commission: 2300, */
     image: "https://images.unsplash.com/photo-1545580492-8859ba8323f0?w=900&auto=format&fit=crop&q=60",
     categories: ["internacional", "tematico"],
     includes: [
@@ -138,8 +138,8 @@ export const packages = [
     id: 9,
     destination: "Perú y Machu Picchu",
     duration: "11 días / 10 noches",
-    price: 31389,
-    commission: 2000,
+   /*  price: 31389,
+    commission: 2000, */
     image: "https://images.unsplash.com/photo-1461681922067-669418071e5c?w=900&auto=format&fit=crop&q=60",
     categories: ["internacional", "grupal"],
     includes: [
@@ -155,7 +155,7 @@ export const packages = [
     destination: "Java y Bali",
     duration: "8 días / 7 noches",
     price: 75999,
-    commission: 5000,
+    commission: 3000,
     image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=900&auto=format&fit=crop&q=60",
     categories: ["internacional", "tematico"],
     includes: [
@@ -170,8 +170,8 @@ export const packages = [
     id: 11,
     destination: "Noruega e Islandia",
     duration: "11 días / 9 noches",
-    price: 52000,
-    commission: 4000,
+   /*  price: 52000,
+    commission: 4000, */
     image: "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?w=900&auto=format&fit=crop&q=60",
     categories: ["internacional", "tematico"],
     includes: [
@@ -187,8 +187,8 @@ export const packages = [
     id: 12,
     destination: "China Imperial",
     duration: "15 días / 12 noches",
-    price: 48900,
-    commission: 3800,
+   /*  price: 48900,
+    commission: 3800, */
     image: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=900&auto=format&fit=crop&q=60",
     categories: ["internacional", "grupal"],
     includes: [
@@ -203,8 +203,8 @@ export const packages = [
     id: 13,
     destination: "París, Londres y Madrid",
     duration: "10 días / 8 noches",
-    price: 39900,
-    commission: 3100,
+    /* price: 39900,
+    commission: 3100, */
     image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=900&auto=format&fit=crop&q=60",
     categories: ["internacional", "grupal"],
     includes: [
@@ -219,8 +219,8 @@ export const packages = [
     id: 14,
     destination: "Buenos Aires, Iguazú y La Patagonia",
     duration: "10 días / 9 noches",
-    price: 33500,
-    commission: 2600,
+ /*    price: 33500,
+    commission: 2600, */
     image: "https://images.unsplash.com/photo-1589909202802-8f4aadce1849?w=900&auto=format&fit=crop&q=60",
     categories: ["internacional"],
     includes: [
@@ -236,8 +236,8 @@ export const packages = [
     id: 15,
     destination: "Atenas e Islas Cícladas",
     duration: "10 días / 8 noches",
-    price: 41200,
-    commission: 3300,
+    /* price: 41200,
+    commission: 3300, */
     image: "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=900&auto=format&fit=crop&q=60",
     categories: ["internacional"],
     includes: [
@@ -253,8 +253,8 @@ export const packages = [
     id: 16,
     destination: "Crucero por el Caribe Sur",
     duration: "8 días / 7 noches",
-    price: 22400,
-    commission: 1800,
+   /*  price: 22400,
+    commission: 1800, */
     image: "https://images.unsplash.com/photo-1548574505-5e23869032da?w=900&auto=format&fit=crop&q=60",
     categories: ["crucero"],
     includes: [
@@ -270,8 +270,8 @@ export const packages = [
     id: 17,
     destination: "Crucero Mediterráneo Clásico",
     duration: "10 días / 9 noches",
-    price: 36800,
-    commission: 2900,
+    /* price: 36800,
+    commission: 2900, */
     image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&auto=format&fit=crop&q=60",
     categories: ["crucero"],
     includes: [
@@ -286,8 +286,8 @@ export const packages = [
     id: 18,
     destination: "Japón Esencial",
     duration: "13 días / 12 noches",
-    price: 58900,
-    commission: 4500,
+  /*   price: 58900,
+    commission: 4500, */
     image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=900&auto=format&fit=crop&q=60",
     categories: ["internacional", "grupal"],
     includes: [
@@ -302,8 +302,8 @@ export const packages = [
     id: 19,
     destination: "Namibia Safari y Estrellas",
     duration: "13 días / 12 noches",
-    price: 64000,
-    commission: 4800,
+  /*   price: 64000,
+    commission: 4800, */
     image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=900&auto=format&fit=crop&q=60",
     categories: ["internacional", "tematico"],
     includes: [
@@ -318,8 +318,8 @@ export const packages = [
     id: 20,
     destination: "Dubái y Safari en Desierto",
     duration: "6 días / 5 noches",
-    price: 29800,
-    commission: 2400,
+  /*   price: 29800,
+    commission: 2400, */
     image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=900&auto=format&fit=crop&q=60",
     categories: ["internacional"],
     includes: [
@@ -335,8 +335,8 @@ export const packages = [
     id: 21,
     destination: "Crucero por los Fiordos Noruegos",
     duration: "8 días / 7 noches",
-    price: 34900,
-    commission: 2700,
+    /* price: 34900,
+    commission: 2700, */
     image: "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=900&auto=format&fit=crop&q=60",
     categories: ["crucero"],
     includes: [
